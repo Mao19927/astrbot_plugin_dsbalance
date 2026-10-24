@@ -30,7 +30,7 @@ except Exception:  # pragma: no cover - 老版本兜底：插件在 <data>/plugi
     DATA_ROOT = Path(__file__).resolve().parents[2]
 
 BALANCE_API = "https://api.deepseek.com/user/balance"
-PLUGIN_DATA = DATA_ROOT / "plugin_data" / "astrbot_plugin_apibalance"
+PLUGIN_DATA = DATA_ROOT / "plugin_data" / "astrbot_plugin_dsbalance"
 STATE_FILE = PLUGIN_DATA / "state.json"
 QR_DIR = PLUGIN_DATA / "payment_qr"
 
@@ -142,7 +142,7 @@ def find_own_qr() -> Path | None:
     return None
 
 
-@register("astrbot_plugin_dsbalance", "Mao19927", "DeepSeek 余额查询、收款码管理与低余额提醒", "1.0.0")
+@register("astrbot_plugin_dsbalance", "Mao19927", "DeepSeek 余额查询、收款码管理与低余额提醒", "1.0.1")
 class ApiBalancePlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig | None = None) -> None:
         super().__init__(context)
