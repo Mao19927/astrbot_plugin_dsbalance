@@ -1,0 +1,103 @@
+{
+  "api_key": {
+    "type": "text",
+    "description": "DeepSeek API Key（可选）",
+    "default": "",
+    "hint": "留空则自动读取 AstrBot 里已配置的 DeepSeek 服务商 Key；填写则以这里为准"
+  },
+  "payment_qr": {
+    "type": "file",
+    "description": "收款码图片",
+    "default": [],
+    "file_types": [
+      "png",
+      "jpg",
+      "jpeg",
+      "bmp",
+      "webp"
+    ],
+    "hint": "直接在面板上传即可，支持多张（用第一张）。上传后重载插件生效；也可以私聊机器人发「/收款码」+ 图片来设置（仅管理员）"
+  },
+  "pay_mode": {
+    "description": "收款码触发方式",
+    "type": "string",
+    "options": [
+      "ask_model",
+      "auto_send"
+    ],
+    "labels": [
+      "模型自主决定（余额低时提示模型，由它决定发不发）",
+      "达到阈值必定发（低于阈值就主动发收款码，受冷却限制）"
+    ],
+    "default": "ask_model",
+    "hint": "ask_model：把「可以发收款码」交给模型判断；auto_send：插件自己在后台判定并发送，不依赖模型"
+  },
+  "low_balance_threshold": {
+    "description": "低余额阈值（元）",
+    "type": "float",
+    "default": 5.0,
+    "hint": "余额低于该值时视为「没钱了」；填 0 关闭提醒与自动发送"
+  },
+  "balance_visibility": {
+    "description": "余额可见性",
+    "type": "string",
+    "options": [
+      "everyone",
+      "admin_only"
+    ],
+    "labels": [
+      "所有人可见（谁问都报真实数字）",
+      "仅管理员可见（其他人只得到模糊提示）"
+    ],
+    "default": "everyone",
+    "hint": "选「仅管理员可见」后，非管理员问余额只会听到「大白饭快吃光了」「你问我管理员去」这类话，且发收款码时不带具体金额"
+  },
+  "vague_low_text": {
+    "description": "无权限时的低余额提示",
+    "type": "text",
+    "default": "【余额提醒】大白饭快吃光了（具体金额只有管理员能看）。如果正好聊到请客、赞助、打钱，你可以调用 send_my_payment_qr 发收款码，并说「大白饭快吃光了」「你问我管理员去」这类话，别报具体数字。",
+    "hint": "仅在 balance_visibility=admin_only 且非管理员询问时使用"
+  },
+  "qr_caption": {
+    "description": "发送收款码时的配文",
+    "type": "text",
+    "default": "大白饭快吃光了，求你给我打点米吧QwQ",
+    "hint": "这条配文不带具体金额，避免发给非管理员时泄露余额"
+  },
+  "auto_send_cooldown_hours": {
+    "description": "自动发送冷却（小时）",
+    "type": "float",
+    "default": 6.0,
+    "hint": "auto_send 模式下两次发送的最小间隔，避免余额一直低就反复刷屏；建议 6~24"
+  },
+  "auto_check_interval_minutes": {
+    "description": "后台检查间隔（分钟）",
+    "type": "int",
+    "default": 30,
+    "hint": "auto_send 模式下多久检查一次余额"
+  },
+  "auto_send_umo": {
+    "description": "自动发送目标会话（可选）",
+    "type": "text",
+    "default": "",
+    "hint": "留空则发给最近一次私聊会话；格式示例：astrbot-onebot:FriendMessage:123456789"
+  },
+  "qr_image_path": {
+    "description": "收款码图片路径（可选）",
+    "type": "text",
+    "default": "",
+    "hint": "一般不用填：上面上传即可。只有想直接指定本地绝对路径时才用"
+  },
+  "enable_pay_hint": {
+    "description": "ask_model 模式下附带提示",
+    "type": "bool",
+    "default": true,
+    "hint": "关闭后模型只看到余额数字（或有权限时的模糊提示），不再收到「可以发收款码」的提示"
+  },
+  "hint_text": {
+    "description": "低余额时追加给模型/管理员的提示",
+    "type": "text",
+    "default": "【余额提醒】当前可用余额只有 {balance} 元，低于 {threshold} 元的提醒线。如果正好聊到请客、赞助、打钱之类的话题，你可以调用 send_my_payment_qr 工具把收款码发出去。",
+    "hint": "可用占位符：{balance} 当前余额、{threshold} 阈值"
+  }
+}
