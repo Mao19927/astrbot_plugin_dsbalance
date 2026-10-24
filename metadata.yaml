@@ -1,0 +1,31 @@
+name: astrbot_plugin_dsbalance
+display_name: DS余额查询与控制
+short_desc: DeepSeek 余额查询、收款码管理与低余额提醒
+desc: >-
+  查询 DeepSeek 账户余额，并在余额偏低时按配置发送收款码。
+  余额可在插件设置页直接查看，也可通过 /余额 命令查询；
+  收款码支持面板上传或管理员私聊发图，发送策略可选“模型自主决定”或“达到阈值必定发”。
+  余额可见性支持“所有人可见”与“仅管理员可见”。
+repo: https://github.com/Mao19927/astrbot_plugin_dsbalance
+help: |-
+  命令：
+    /余额              查询 DeepSeek 账户余额
+    /收款码            查看当前收款码
+    /收款码 + 图片     上传或替换收款码（仅管理员）
+    /收款码 清除       清除已保存的收款码（仅管理员）
+
+  主要配置：
+    DeepSeek API Key   可选，留空则自动读取 AstrBot 已配置的 DeepSeek Key
+    余额可见性         所有人可见 / 仅管理员可见
+    触发方式           模型自主决定 / 达到阈值必定发（带冷却）
+    低余额阈值         默认 5 元
+    自动发送冷却       默认 6 小时
+version: 1.0.0
+author: Mao19927
+astrbot_version: ">=4.17.0"
+support_platforms:
+  - aiocqhttp
+tags:
+  - 余额
+  - 计费
+  - 收款码
