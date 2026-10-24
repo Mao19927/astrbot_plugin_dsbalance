@@ -20,7 +20,7 @@ help: |-
     触发方式           模型自主决定 / 达到阈值必定发（带冷却）
     低余额阈值         默认 5 元
     自动发送冷却       默认 6 小时
-version: 1.0.0
+version: 1.0.1
 author: Mao19927
 astrbot_version: ">=4.17.0"
 support_platforms:
